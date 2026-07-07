@@ -5,8 +5,12 @@ export const metadata: Metadata = {
   title: "Qubi — AI Assistant",
   description: "Personal AI assistant powered by Ollama with RAG",
   icons: {
-    icon: "/favicon.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/logo.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.png",
   },
 };
 
