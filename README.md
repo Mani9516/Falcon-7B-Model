@@ -2,93 +2,18 @@
 
 A full-stack RAG-powered chatbot with **LangChain**, **FAISS**, **Ollama/Groq**, and a **Qubi-style** Next.js UI.
 
-## Architecture
+🚀 Just Built My Own QnA Chatbot with Falcon-7B-Instruct! 🚀 Here’s a sneak peek into how it all came together:
 
-```
-┌─────────────────┐     REST API      ┌──────────────────────────────┐
-│  Next.js UI     │ ◄──────────────► │  FastAPI Backend              │
-│  (port 3000)    │                   │  (port 8000)                  │
-│                 │                   │                               │
-│  • Sidebar      │                   │  • /api/chat    — QnA         │
-│  • Chat         │                   │  • /api/upload  — RAG ingest  │
-│  • File upload  │                   │  • /api/chats   — History     │
-│  • Voice input  │                   │                               │
-└─────────────────┘                   │  ┌─────────┐  ┌───────────┐  │
-                                      │  │  FAISS  │  │  Ollama   │  │
-                                      │  │  Vector │  │  / Groq   │  │
-                                      │  │  Store  │  │  LLM      │  │
-                                      │  └─────────┘  └───────────┘  │
-                                      └──────────────────────────────┘
-```
+Getting the Tools Ready: I started by setting up essential libraries like LangChain and FAISS—these tools are absolute game-changers for managing embeddings and vector searches!
 
-## Quick Start
+Tapping into Hugging Face’s Power: By connecting to Hugging Face with my API token, I unlocked the power of the Falcon-7B-Instruct model. The model is a beast when it comes to understanding context and delivering accurate answers!
 
-### 1. Backend
+Bringing the Chatbot to Life :I created a simple yet effective function that takes user queries, formulates them into prompts, and lets the Falcon model do its magic. The responses are real-time and super sharp!
 
-```bash
-cd backend
-python -m venv venv
+The Results? Mind-Blowing! 🧠💥 The chatbot now provides quick, intelligent responses, making it perfect for any QnA scenario. It’s amazing to see how advanced AI can simplify complex interactions!
 
-# Windows
-venv\Scripts\activate
+This project was a blast, and it’s incredible to see what’s possible with today’s AI technology. Can’t wait to explore even more with these tools
 
-# macOS/Linux
-source venv/bin/activate
 
-pip install -r requirements.txt
-cp .env.example .env
-```
 
-Edit `backend/.env` — default uses **Ollama** (free, local):
 
-```
-LLM_PROVIDER=ollama
-OLLAMA_MODEL=llama3.2
-```
-
-Start the API:
-
-```bash
-uvicorn app.main:app --reload --port 8000
-```
-
-API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
-
-### 2. Frontend
-
-```bash
-cd frontend
-npm install
-cp .env.local.example .env.local
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000)
-
-## Features
-
-| Feature | Description |
-|---------|-------------|
-| **RAG Pipeline** | Upload PDF/TXT/MD/CSV → chunked → embedded → stored in FAISS |
-| **Ollama / Groq** | Free local (Ollama) or free cloud (Groq) LLM |
-| **Chat History** | Sidebar with date-grouped conversations |
-| **Delete Chats** | Remove conversations from sidebar or header |
-| **File Upload** | Paperclip button — indexes documents for Q&A |
-| **Voice Input** | Browser speech recognition (Chrome/Edge) |
-| **Qubi UI** | Dark sidebar, robot logo, modern laptop layout |
-
-## API Endpoints
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/api/health` | Health check + LLM status |
-| `GET` | `/api/chats` | List all chats |
-| `POST` | `/api/chats` | Create new chat |
-| `DELETE` | `/api/chats/{id}` | Delete a chat |
-| `GET` | `/api/chats/{id}/messages` | Get chat messages |
-| `POST` | `/api/chat` | Send message, get AI response |
-| `POST` | `/api/upload` | Upload & index a document |
-
-## License
-
-MIT
